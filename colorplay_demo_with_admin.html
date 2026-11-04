@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#101014">
+<title>ColorPlay — Demo Portal</title>
+<style>
+:root{--bg:#0d0d12;--panel:#17171f;--panel2:#20202b;--gold:#f4c35b;--muted:#a3a2af;--line:#343440;--text:#f6f4ef}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#27212a 0,#0d0d12 44%);color:var(--text);font:14px system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding-bottom:82px}button,input,select{font:inherit}button{cursor:pointer}
+header{max-width:900px;margin:auto;padding:18px 16px 12px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:22px;font-weight:950;letter-spacing:.5px}.brand span{color:var(--gold)}.tag{font-size:10px;font-weight:900;letter-spacing:.7px;background:var(--gold);color:#211a0d;border-radius:18px;padding:6px 9px}
+.wrap{max-width:900px;margin:auto;padding:0 14px}.hero{border:1px solid #423745;border-radius:18px;padding:17px;background:linear-gradient(135deg,#302431,#17171f 68%);margin-bottom:13px}.eyebrow{font-size:10px;letter-spacing:1.6px;color:var(--gold);font-weight:900}.hero h1{font-size:24px;margin:7px 0}.hero p{color:#c1bdc9;font-size:13px;line-height:1.5;margin:0}.notice{padding:10px 12px;border:1px solid #6c542b;background:#302719;color:#f5dca4;border-radius:12px;font-size:12px;line-height:1.5;margin-bottom:14px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}.tab{background:#24232d;color:#bcb9c6;border:1px solid var(--line);border-radius:11px;padding:12px;font-weight:850}.tab.active{background:var(--gold);color:#211a0d;border-color:var(--gold)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:13px}.head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.head h2{font-size:15px;margin:0}.muted{font-size:12px;color:var(--muted)}.timerbox{display:flex;justify-content:space-between;align-items:center;background:var(--panel2);border-radius:12px;padding:12px;margin-bottom:12px}.round{font-weight:850}.timer{font-size:22px;color:var(--gold);font-weight:950;font-variant-numeric:tabular-nums}
+.colors{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.pick{border:2px solid transparent;border-radius:12px;padding:13px 4px;color:white;font-weight:900;min-height:68px}.pick small{display:block;font-size:10px;margin-top:4px;opacity:.85}.red{background:linear-gradient(140deg,#ef535b,#9e202b)}.green{background:linear-gradient(140deg,#2bc17d,#126747)}.violet{background:linear-gradient(140deg,#9a6cf0,#54309b)}.pick.selected,.size.selected{border-color:white;box-shadow:0 0 0 2px #f4c35b66}.sizes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.size{background:#2b2b37;color:#fff;border:1px solid #484855;border-radius:10px;padding:12px;font-weight:850}.size.selected{border-color:var(--gold);color:var(--gold)}
+.primary{width:100%;padding:13px;border:0;border-radius:11px;background:var(--gold);color:#211a0d;font-weight:950;margin-top:12px}.secondary{background:#2b2b37;color:#f4c35b;border:1px solid #494655;border-radius:10px;padding:9px 11px;font-weight:800}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--panel2);padding:12px 6px;border-radius:11px;text-align:center}.stat b{font-size:20px;display:block}.stat span{font-size:10px;color:var(--muted)}.result{display:flex;gap:10px;align-items:center;background:var(--panel2);padding:12px;border-radius:11px}.dot{height:17px;width:17px;border-radius:50%}.dot.red{background:#ef535b}.dot.green{background:#2bc17d}.dot.violet{background:#9a6cf0}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px 5px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:650}.pill{display:inline-block;border-radius:18px;padding:4px 7px;font-size:10px;font-weight:900}.pill.red{background:#51232a;color:#ff9da2}.pill.green{background:#174b38;color:#8be8bb}.pill.violet{background:#38265c;color:#cbb3ff}.empty{text-align:center;color:var(--muted);padding:18px}
+.field{display:block;width:100%;padding:12px;background:#24242f;color:#fff;border:1px solid #444451;border-radius:10px;margin:7px 0 12px}.label{font-size:12px;color:#c7c4d0;font-weight:750}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.adminstat{background:#23232d;border:1px solid #383844;border-radius:12px;padding:13px}.adminstat span{color:var(--muted);font-size:11px}.adminstat b{display:block;font-size:23px;margin-top:4px}.rowbtn{display:flex;gap:7px;flex-wrap:wrap}.hidden{display:none!important}nav{position:fixed;bottom:0;left:0;right:0;background:#15151c;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 4px calc(10px + env(safe-area-inset-bottom));z-index:5}nav a{text-align:center;color:#aaa;text-decoration:none;font-size:10px}nav b{display:block;color:var(--gold);font-size:17px;margin-bottom:2px}footer{text-align:center;color:#777;font-size:10px;padding:8px 20px 20px;line-height:1.5}
+@media(min-width:650px){.maincols{display:grid;grid-template-columns:1.05fr .95fr;gap:13px;align-items:start}.hero h1{font-size:28px}}
+</style>
+</head>
+<body>
+<header><div class="brand">COLOR<span>PLAY</span></div><span class="tag">DEMO MODE</span></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">COLOUR GAME SIMULATOR</div><h1>Play. Learn. Track.</h1><p>A mobile-first sample interface with random demo rounds, history, and a separate admin demo.</p></section>
+<div class="notice">Demo only — no real-money betting, deposits, withdrawals, cash prizes, or prediction advice. All results are random samples.</div>
+<div class="tabs"><button class="tab active" id="userTab">User Website</button><button class="tab" id="adminTab">Admin Panel</button></div>
+<section id="userView">
+<div class="maincols">
+<div>
+<section class="card">
+<div class="head"><h2>🎮 Colour round</h2><span class="muted">Auto rounds</span></div>
+<div class="timerbox"><div><div class="muted">CURRENT ROUND</div><div class="round" id="round">#1001</div></div><div style="text-align:right"><div class="muted">NEXT RESULT IN</div><div class="timer" id="timer">00:30</div></div></div>
+<div class="muted" style="margin-bottom:9px">Pick for demo tracking</div>
+<div class="colors"><button class="pick red" data-color="Red">RED<small>Colour 1</small></button><button class="pick green" data-color="Green">GREEN<small>Colour 2</small></button><button class="pick violet" data-color="Violet">VIOLET<small>Colour 3</small></button></div>
+<div class="sizes"><button class="size" data-size="Big">BIG</button><button class="size" data-size="Small">SMALL</button></div>
+<button class="primary" id="track">SAVE DEMO SELECTION</button><div class="muted" id="selection" style="text-align:center;margin-top:9px">No selection yet</div>
+</section>
+<section class="card"><div class="head"><h2>Latest demo result</h2><span class="muted">Random</span></div><div class="result"><div class="dot violet" id="lastdot"></div><div><b id="lastcolor">Violet</b><div class="muted" id="lastmeta">Round #1000 · Sample result</div></div></div></section>
+</div>
+<div>
+<section class="card"><div class="head"><h2>Session statistics</h2><span class="muted">Demo</span></div><div class="stats"><div class="stat"><b id="total">0</b><span>ROUNDS</span></div><div class="stat"><b id="reds">0</b><span>RED</span></div><div class="stat"><b id="greens">0</b><span>GREEN</span></div></div></section>
+<section class="card"><div class="head"><h2>Recent history</h2><button class="secondary" id="clear">Clear</button></div><div style="overflow-x:auto"><table><thead><tr><th>ROUND</th><th>RESULT</th><th>SIZE</th><th>TYPE</th></tr></thead><tbody id="history"><tr><td colspan="4" class="empty">Waiting for first demo round…</td></tr></tbody></table></div></section>
+</div>
+</div>
+</section>
+<section id="adminView" class="hidden">
+<section class="card" id="loginCard"><div class="head"><h2>🔐 Admin demo login</h2><span class="muted">Local preview</span></div><p class="muted">Use the demo credentials shown below. This is a front-end preview only, not secure authentication for a public service.</p><label class="label" for="adminUser">Username</label><input class="field" id="adminUser" value="admin" autocomplete="username"><label class="label" for="adminPass">Demo password</label><input class="field" id="adminPass" type="password" value="demo123" autocomplete="current-password"><div class="muted">Demo credentials: admin / demo123</div><button class="primary" id="loginBtn">OPEN ADMIN DASHBOARD</button><div class="muted" id="loginMsg" style="margin-top:9px"></div></section>
+<div id="dashboard" class="hidden">
+<section class="card"><div class="head"><h2>Admin overview</h2><button class="secondary" id="logoutBtn">Log out</button></div><div class="grid2"><div class="adminstat"><span>Total demo rounds</span><b id="admRounds">0</b></div><div class="adminstat"><span>Demo users</span><b>12</b></div><div class="adminstat"><span>Recorded colours</span><b id="admColors">0</b></div><div class="adminstat"><span>System status</span><b style="font-size:16px;color:#85e0ad">Demo online</b></div></div></section>
+<section class="card"><div class="head"><h2>Round controls</h2><span class="muted">Simulation only</span></div><label class="label" for="roundLength">Round timer</label><select id="roundLength" class="field"><option value="30">30 seconds</option><option value="60">60 seconds</option></select><label class="label" for="manualResult">Add a sample result</label><select id="manualResult" class="field"><option>Red</option><option>Green</option><option>Violet</option></select><div class="rowbtn"><button class="primary" style="flex:1;margin-top:0" id="addResult">ADD DEMO RESULT</button><button class="secondary" id="resetRounds">Reset history</button></div><p class="muted">Manual results are marked as admin sample entries. This does not control any external game.</p></section>
+<section class="card"><div class="head"><h2>Website settings</h2><span class="muted">Local preview</span></div><label class="label" for="siteTitle">Site title</label><input id="siteTitle" class="field" value="COLORPLAY"><label class="label" for="bannerText">Welcome message</label><input id="bannerText" class="field" value="Play. Learn. Track."><button class="primary" id="saveSettings">SAVE PREVIEW SETTINGS</button><div class="muted" id="settingsMsg" style="margin-top:8px"></div></section>
+<section class="card"><div class="head"><h2>Recent round records</h2><span class="muted">Admin view</span></div><div style="overflow-x:auto"><table><thead><tr><th>ROUND</th><th>RESULT</th><th>SIZE</th><th>NOTE</th></tr></thead><tbody id="adminHistory"><tr><td colspan="4" class="empty">No records yet</td></tr></tbody></table></div></section>
+</div>
+</section>
+<footer>COLORPLAY DEMO · Interface testing only. Not a gambling service.<br>Admin login is a local mock-up; do not use demo credentials for real accounts.</footer>
+</main>
+<nav><a href="#" id="navHome"><b>⌂</b>Home</a><a href="#history" id="navHistory"><b>▤</b>History</a><a href="#adminView" id="navAdmin"><b>⚙</b>Admin demo</a><a href="#" id="navAbout"><b>ⓘ</b>About</a></nav>
+<script>
+let round=1001,seconds=30,roundLength=30,chosenColor="",chosenSize="",history=[];
+const $=id=>document.getElementById(id);
+function selectButtons(selector,attr,value){document.querySelectorAll(selector).forEach(b=>b.classList.toggle("selected",b.getAttribute(attr)===value))}
+document.querySelectorAll("[data-color]").forEach(b=>b.addEventListener("click",()=>{chosenColor=b.dataset.color;selectButtons("[data-color]","data-color",chosenColor);updateSelection()}));
+document.querySelectorAll("[data-size]").forEach(b=>b.addEventListener("click",()=>{chosenSize=b.dataset.size;selectButtons("[data-size]","data-size",chosenSize);updateSelection()}));
+function updateSelection(){$("selection").textContent=[chosenColor,chosenSize].filter(Boolean).join(" · ")||"No selection yet"}
+$("track").addEventListener("click",()=>{if(!chosenColor&&!chosenSize){$("selection").textContent="Choose a colour or size first";return}$("selection").textContent="Saved for demo tracking: "+[chosenColor,chosenSize].filter(Boolean).join(" · ")});
+function recordResult(color,note="Random demo"){let size=Math.random()<.5?"Big":"Small";history.unshift({round,color,size,note});history=history.slice(0,30);$("lastcolor").textContent=color;$("lastdot").className="dot "+color.toLowerCase();$("lastmeta").textContent="Round #"+round+" · Sample result";render();round++;}
+function render(){const rows=history.map(h=>`<tr><td>#${h.round}</td><td><span class="pill ${h.color.toLowerCase()}">${h.color}</span></td><td>${h.size}</td><td>Demo</td></tr>`).join("");$("history").innerHTML=rows||'<tr><td colspan="4" class="empty">No records yet</td></tr>';$("adminHistory").innerHTML=history.map(h=>`<tr><td>#${h.round}</td><td><span class="pill ${h.color.toLowerCase()}">${h.color}</span></td><td>${h.size}</td><td>${h.note}</td></tr>`).join("")||'<tr><td colspan="4" class="empty">No records yet</td></tr>';$("total").textContent=history.length;$("reds").textContent=history.filter(h=>h.color==="Red").length;$("greens").textContent=history.filter(h=>h.color==="Green").length;$("admRounds").textContent=history.length;$("admColors").textContent=new Set(history.map(h=>h.color)).size;}
+function startRound(){seconds--;if(seconds<=0){recordResult(["Red","Green","Violet"][Math.floor(Math.random()*3)]);seconds=roundLength;$("round").textContent="#"+round;}$("timer").textContent="00:"+String(seconds).padStart(2,"0")}
+setInterval(startRound,1000);
+$("clear").addEventListener("click",()=>{history=[];render()});
+$("userTab").addEventListener("click",()=>showTab(false));$("adminTab").addEventListener("click",()=>showTab(true));
+function showTab(admin){$("userView").classList.toggle("hidden",admin);$("adminView").classList.toggle("hidden",!admin);$("userTab").classList.toggle("active",!admin);$("adminTab").classList.toggle("active",admin)}
+$("loginBtn").addEventListener("click",()=>{if($("adminUser").value==="admin"&&$("adminPass").value==="demo123"){$("loginCard").classList.add("hidden");$("dashboard").classList.remove("hidden");$("loginMsg").textContent=""}else $("loginMsg").textContent="Incorrect demo credentials."});
+$("logoutBtn").addEventListener("click",()=>{$("dashboard").classList.add("hidden");$("loginCard").classList.remove("hidden")});
+$("roundLength").addEventListener("change",e=>{roundLength=Number(e.target.value);seconds=roundLength;$("timer").textContent="00:"+String(seconds).padStart(2,"0")});
+$("addResult").addEventListener("click",()=>recordResult($("manualResult").value,"Admin sample"));
+$("resetRounds").addEventListener("click",()=>{history=[];render()});
+$("saveSettings").addEventListener("click",()=>{$(".brand").innerHTML=$("siteTitle").value.replace(/</g,"&lt;").replace(/>/g,"&gt;");$(".hero h1").textContent=$("bannerText").value;$("settingsMsg").textContent="Preview settings applied on this page."});
+$("navHome").addEventListener("click",e=>{e.preventDefault();showTab(false);window.scrollTo({top:0,behavior:"smooth"})});$("navAdmin").addEventListener("click",e=>{e.preventDefault();showTab(true);window.scrollTo({top:0,behavior:"smooth"})});$("navHistory").addEventListener("click",e=>{e.preventDefault();showTab(false);$("history").scrollIntoView({behavior:"smooth",block:"center"})});$("navAbout").addEventListener("click",e=>{e.preventDefault();alert("ColorPlay is a random demo simulator. No real money or prizes.")});
+</script>
+</body></html>
